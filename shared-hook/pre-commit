@@ -1,0 +1,20 @@
+#!/bin/bash
+
+CMINFOPATH=suivi
+CMFILE=commitInfo.txt
+
+mkdir $CMINFOPATH
+
+read -p "Ajouter la date et l'heure de vérification du commit dans les logs (y/[n]) ?" yn < /dev/tty
+yn=${yn:n}
+case $yn in
+ [Yy]* )
+ echo -e "Vérifier le $(date '+%Y-%m-%d %H:%M:%S')" > $CMINFOPATH/$CMFILE
+ git add $CMINFOPATH/$CMFILE
+ exit 0;;
+ [Nn]* )
+ rm $CMINFOPATH/$CMFILE
+ git add $CMINFOPATH/
+ exit 0;;
+esac
+exit 0
